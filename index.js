@@ -72,7 +72,7 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
 
       // if we're not dealing with a clear: declaration exit
       if (prop !== 'clear') {
-        return false;
+        return;
       }
 
       // pass all clear: fix; properties to the clearFix handler
