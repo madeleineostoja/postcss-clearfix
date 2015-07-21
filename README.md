@@ -47,7 +47,7 @@ See [PostCSS] docs for examples for your environment.
 
 ### License
 
-MIT © [Sean King](http://simpla.io)
+MIT © [Sean King](https://twitter.com/seaneking)
 
 [npm-image]: https://badge.fury.io/js/postcss-clearfix.svg
 [npm-url]: https://npmjs.org/package/postcss-clearfix
