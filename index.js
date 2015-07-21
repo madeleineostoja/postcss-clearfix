@@ -3,9 +3,12 @@
 var postcss = require('postcss');
 
 module.exports = postcss.plugin('postcss-clearfix', function () {
-  return function (css) {
+  return function (css, result) {
 
-    // build our clear: fix; handler
+    /**
+     * Clear: fix; rule handler
+     * @param  {string} decl  current decleration
+     */
     var clearFix = function(decl){
 
       var origRule = decl.parent,
@@ -14,23 +17,24 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
             selector: ruleSelector + ':after'
           });
 
-      // insert the :after rule before the original rule
+      // Insert the :after rule before the original rule
       origRule.parent.insertBefore(origRule, newRule);
-
-      // create the necessary declarations in our new rule
       newRule.append('content: \'\'; display: table; clear: both;');
 
-      // if the original rule only had clear:fix in it, remove the whole rule
+      // If the original rule only had clear:fix in it, remove the whole rule
       if (decl.prev() === undefined && decl.next() === undefined) {
         origRule.removeSelf();
       } else {
-        // otherwise just remove the clear: delcaration
+        // Otherwise just remove the delcl
         decl.removeSelf();
       }
 
     };
 
-    // build our clear: fix-legacy handler
+    /**
+     * Clear: fix-legacy; rule handler
+     * @param  {string} decl  current decleration
+     */
     var clearFixLegacy = function(decl) {
 
       var origRule = decl.parent,
@@ -42,14 +46,13 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
           selector: ruleSelector + ':after'
         });
 
-      // insert the new rules before the original rule
+      // Insert new rules before the original rule
       origRule.parent.insertBefore(origRule, bothRule);
       origRule.parent.insertBefore(origRule, afterRule);
 
-      // create the necessary declarations in our new rules
       bothRule.append('content: \'\'; display: table;');
 
-      // longhand syntax operates a little quicker, only single decl's here so use it.
+      // Longhand syntax operates a little quicker, only single decls here so use it.
       afterRule.append({
         prop: 'clear',
         value: 'both'
@@ -60,36 +63,33 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
         value: '1'
       });
 
-      // remove the original clear: legacy-fix; declaration
       decl.removeSelf();
     };
 
-    // build our plugin handler
-    var ruleHandler = function(decl) {
+    // Run handlers through all relevant CSS decls
+    css.eachDecl('clear', function(decl) {
 
-      var prop = decl.prop,
-          val = decl.value;
+      var val = decl.value;
 
-      // if we're not dealing with a clear: declaration exit
-      if (prop !== 'clear') {
-        return;
+
+      switch (val) {
+
+        // Pass all clear: fix; properties to clearFix()
+        case 'fix':
+          clearFix(decl);
+          break;
+
+        // Pass all clear: fix-legacy properties to clearFixLegacy()
+        case 'fix-legacy':
+          clearFixLegacy(decl);
+          break;
+
+        // Otherwise warn that it's useless
+        default:
+          result.warn(val + ' is not a valid property of ' + decl.prop, { node: decl });
+
       }
 
-      // pass all clear: fix; properties to the clearFix handler
-      if (val === 'fix') {
-        clearFix(decl);
-      }
-
-      // pass all clear: fix-legacy; properties to the clearFixLegacy handler
-      if (val === 'fix-legacy') {
-        clearFixLegacy(decl);
-      }
-
-    };
-
-    // loop through each css rule and declaration, and run our plugin through them
-    css.eachRule(function(rule) {
-      rule.each(ruleHandler);
     });
 
   };
