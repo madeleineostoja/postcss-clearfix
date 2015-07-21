@@ -1,0 +1,8 @@
+.foo:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.foo {
+  color: #fff;
+}
