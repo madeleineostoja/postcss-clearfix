@@ -84,10 +84,6 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
           clearFixLegacy(decl);
           break;
 
-        // Otherwise warn that it's useless
-        default:
-          result.warn(val + ' is not a valid property of ' + decl.prop, { node: decl });
-
       }
 
     });
