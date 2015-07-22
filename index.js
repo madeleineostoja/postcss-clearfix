@@ -3,7 +3,7 @@
 var postcss = require('postcss');
 
 module.exports = postcss.plugin('postcss-clearfix', function () {
-  return function (css, result) {
+  return function (css) {
 
     /**
      * Clear: fix; rule handler
