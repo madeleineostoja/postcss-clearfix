@@ -12,9 +12,15 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
     var clearFix = function(decl){
 
       var origRule = decl.parent,
-          ruleSelector = origRule.selector,
-          newRule = postcss.rule({
-            selector: ruleSelector + ':after'
+          ruleSelectors = origRule.selectors,
+          newRule;
+
+      ruleSelectors = ruleSelectors.map(function(ruleSelector){
+          return ruleSelector + ':after';
+        }).join(',\n');
+
+      newRule = postcss.rule({
+            selector: ruleSelectors
           });
 
       // Insert the :after rule before the original rule
@@ -38,12 +44,26 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
     var clearFixLegacy = function(decl) {
 
       var origRule = decl.parent,
-        ruleSelector = origRule.selector,
+        ruleSelectors = origRule.selectors,
+        bothRuleSelectors,
+        afterRuleSelectors,
+        bothRule,
+        afterRule;
+
+        bothRuleSelectors = ruleSelectors.map(function(ruleSelector){
+            return ruleSelector + ':before,\n' + ruleSelector + ':after';
+        }).join(',\n');
+
+        afterRuleSelectors = ruleSelectors.map(function(ruleSelector){
+              return ruleSelector + ':after';
+        }).join(',\n');
+
         bothRule = postcss.rule({
-          selector: ruleSelector + ':before' + ',\n' + ruleSelector + ':after'
-        }),
+          selector: bothRuleSelectors
+        });
+
         afterRule = postcss.rule({
-          selector: ruleSelector + ':after'
+          selector: afterRuleSelectors
         });
 
       // Insert new rules before the original rule
@@ -69,10 +89,7 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
     // Run handlers through all relevant CSS decls
     css.eachDecl('clear', function(decl) {
 
-      var val = decl.value;
-
-
-      switch (val) {
+      switch (decl.value) {
 
         // Pass all clear: fix; properties to clearFix()
         case 'fix':
