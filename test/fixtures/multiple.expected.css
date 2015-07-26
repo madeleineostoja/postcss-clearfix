@@ -1,8 +1,30 @@
-.foo:after {
+.foo:after,
+.bar:after {
   content: '';
   display: table;
   clear: both;
 }
-.foo {
+
+.foo,
+.bar {
   color: #fff;
+}
+
+.baz:before,
+.baz:after,
+.fab:before,
+.fab:after {
+  content: '';
+  display: table;
+}
+
+.baz:after,
+.fab:after {
+  clear: both;
+}
+
+.baz,
+.fab {
+  color: #000;
+  zoom: 1;
 }

@@ -37,7 +37,7 @@ describe('postcss-clearfix', function () {
     test('fix-legacy', {}, done);
   });
 
-  it('does\'t destroy the node if there\'s more than one declaration in it', function(done) {
+  it('handles multiple selectors and declerations', function(done) {
     test('multiple', {}, done);
   });
 
