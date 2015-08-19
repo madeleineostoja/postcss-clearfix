@@ -1,7 +1,9 @@
-# PostCSS Clearfix 
+# PostCSS Clearfix
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-[PostCSS] plugin that adds `fix` and `fix-legacy` attributes to the `clear` property, for self-clearing of children.
+[PostCSS][PostCSS] plugin that adds `fix` and `fix-legacy` attributes to the `clear` property, for self-clearing of children.
+
+Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack).
 
 ```css
 .foo {
@@ -24,7 +26,7 @@
 .bar:after {
   content: '';
   display: table;
-} 
+}
 .bar:after {
   clear: both;
 }
@@ -41,7 +43,7 @@
 postcss([ require('postcss-clearfix') ])
 ```
 
-See [PostCSS] docs for examples for your environment.
+See [PostCSS][PostCSS] docs for examples for your environment.
 
 --
 
@@ -56,4 +58,3 @@ MIT © [Sean King](https://twitter.com/seaneking)
 [daviddm-image]: https://david-dm.org/seaneking/postcss-clearfix.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/seaneking/postcss-clearfix
 [PostCSS]: https://github.com/postcss/postcss
-
