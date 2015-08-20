@@ -19,12 +19,11 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
           return ruleSelector + ':after';
         }).join(',\n');
 
-      newRule = postcss.rule({
-            selector: ruleSelectors
-          });
-
       // Insert the :after rule before the original rule
-      origRule.parent.insertBefore(origRule, newRule);
+      newRule = origRule.cloneBefore({
+        selector: ruleSelectors
+      }).removeAll();
+
       newRule.append('content: \'\'; display: table; clear: both;');
 
       // If the original rule only had clear:fix in it, remove the whole rule
@@ -58,17 +57,14 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
               return ruleSelector + ':after';
         }).join(',\n');
 
-        bothRule = postcss.rule({
-          selector: bothRuleSelectors
-        });
-
-        afterRule = postcss.rule({
-          selector: afterRuleSelectors
-        });
-
       // Insert new rules before the original rule
-      origRule.parent.insertBefore(origRule, bothRule);
-      origRule.parent.insertBefore(origRule, afterRule);
+      bothRule = origRule.cloneBefore({
+        selector: bothRuleSelectors
+      }).removeAll();
+
+      afterRule = origRule.cloneBefore({
+        selector: afterRuleSelectors
+      }).removeAll();
 
       bothRule.append('content: \'\'; display: table;');
 
