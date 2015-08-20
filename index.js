@@ -28,10 +28,10 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
 
       // If the original rule only had clear:fix in it, remove the whole rule
       if (decl.prev() === undefined && decl.next() === undefined) {
-        origRule.removeSelf();
+        origRule.remove();
       } else {
         // Otherwise just remove the delcl
-        decl.removeSelf();
+        decl.remove();
       }
 
     };
@@ -79,11 +79,11 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
         value: '1'
       });
 
-      decl.removeSelf();
+      decl.remove();
     };
 
     // Run handlers through all relevant CSS decls
-    css.eachDecl('clear', function(decl) {
+    css.walkDecls('clear', function(decl) {
 
       switch (decl.value) {
 
