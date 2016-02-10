@@ -9,7 +9,7 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
      * Clear: fix; rule handler
      * @param  {string} decl  current decleration
      */
-    var clearFix = function(decl){
+    function clearFix(decl){
 
       var origRule = decl.parent,
           ruleSelectors = origRule.selectors,
@@ -40,7 +40,7 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
      * Clear: fix-legacy; rule handler
      * @param  {string} decl  current decleration
      */
-    var clearFixLegacy = function(decl) {
+    function clearFixLegacy(decl) {
 
       var origRule = decl.parent,
         ruleSelectors = origRule.selectors,
