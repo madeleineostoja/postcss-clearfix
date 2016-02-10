@@ -30,12 +30,16 @@
     "postcss": "^5.0"
   },
   "devDependencies": {
-    "gulp-eslint": "^0.12.0",
-    "gulp-mocha": "^2.0.1",
     "chai": "^2.3.0",
-    "gulp": "^3.8.11"
+    "eslint": "^1.10.3",
+    "mocha": "^2.4.5"
   },
+  "files": [
+    "index.js"
+  ],
   "scripts": {
-    "test": "gulp check"
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "mocha test --reporter nyan"
   }
 }
