@@ -7,7 +7,7 @@ var postcss = require('postcss'),
     path = require('path'),
     plugin = require('../');
 
-var test = function (fixture, opts, done) {
+function test(fixture, opts, done) {
   var input = fixture + '.css',
       expected = fixture + '.expected.css';
 
