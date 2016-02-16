@@ -9,6 +9,9 @@
     "clearfix",
     "clear"
   ],
+  "files": [
+    "index.js"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
