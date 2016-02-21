@@ -38,6 +38,12 @@ describe('postcss-clearfix', function () {
     return test('fix', {});
   });
 
+  it('sets clear:fix with table correctly', function() {
+    return test('fix-table', {
+      display: 'table'
+    });
+  });
+
   it('sets clear:fix-legacy correctly', function() {
     return test('fix-legacy', {});
   });

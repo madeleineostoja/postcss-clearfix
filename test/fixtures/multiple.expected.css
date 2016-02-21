@@ -1,7 +1,7 @@
 .foo:after,
 .bar:after {
   content: '';
-  display: table;
+  display: block;
   clear: both;
 }
 

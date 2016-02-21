@@ -1,8 +1,15 @@
 'use strict';
 
-var postcss = require('postcss');
+var postcss = require('postcss'),
+    displays = ['block', 'table'];
 
-module.exports = postcss.plugin('postcss-clearfix', function () {
+module.exports = postcss.plugin('postcss-clearfix', function (opts) {
+  opts = opts || {};
+
+  if (displays.indexOf(opts.display) === -1) {
+    opts.display = displays[0];
+  }
+
   return function (css) {
 
     /**
@@ -24,7 +31,7 @@ module.exports = postcss.plugin('postcss-clearfix', function () {
         selector: ruleSelectors
       }).removeAll();
 
-      newRule.append('content: \'\'; display: table; clear: both;');
+      newRule.append('content: \'\'; display: ' + opts.display + '; clear: both;');
 
       // If the original rule only had clear:fix in it, remove the whole rule
       if (decl.prev() === undefined && decl.next() === undefined) {
