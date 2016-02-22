@@ -1,6 +1,6 @@
 .foo:before,
 .foo:after {
-  content: '';
+  content: ' ';
   display: table;
 }
 .foo:after {

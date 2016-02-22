@@ -64,7 +64,7 @@ function clearFixLegacy(decl) {
     selector: afterRuleSelectors
   }).removeAll();
 
-  bothRule.append('content: \'\'; display: table;');
+  bothRule.append('content: \' \'; display: table;');
 
   // Longhand syntax operates a little quicker, only single decls here so use it.
   afterRule.append({
