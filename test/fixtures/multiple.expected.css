@@ -14,7 +14,7 @@
 .baz:after,
 .fab:before,
 .fab:after {
-  content: '';
+  content: ' ';
   display: table;
 }
 
