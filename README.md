@@ -18,7 +18,7 @@ Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack).
 ```css
 .foo:after{
   content: '';
-  display: table;
+  display: block;
   clear: both;
 }
 
@@ -42,6 +42,16 @@ Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack).
 ```js
 postcss([ require('postcss-clearfix') ])
 ```
+
+#### Options
+
+##### display
+
+Type: `string`
+Default: `block`
+
+Allows to customise `fix` with `block` or `table` display property.
+Use `table` to prevent margin collapsing in the end of fixed element.
 
 See [PostCSS][PostCSS] docs for examples for your environment.
 
