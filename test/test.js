@@ -20,10 +20,19 @@ function test(fixture, opts) {
       expected = readFixture(fixture + '.expected.css');
 
   return postcss([ plugin(opts) ])
-    .process(input)
+    .process(input, {
+      from: fixture + '.css',
+      map: {
+        inline: false,
+        annotation: false
+      }
+    })
     .then(function (result) {
+      var map = result.map.toJSON(),
+          warnings = result.warnings();
+      expect(map.sourcesContent.length).to.equal(1);
+      expect(map.sourcesContent[0]).to.match(/clear: fix/);
       expect(result.css).to.eql(expected);
-      var warnings = result.warnings();
       if (warnings.length) {
         console.log(warnings);
       }
