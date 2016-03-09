@@ -22,7 +22,19 @@ function clearFix(decl, opts) {
     selector: ruleSelectors
   }).removeAll();
 
-  newRule.append('content: \'\'; display: ' + opts.display + '; clear: both;');
+  newRule.append({
+    prop: 'content',
+    value: '\'\'',
+    source: decl.source
+  }, {
+    prop: 'display',
+    value: opts.display,
+    source: decl.source
+  }, {
+    prop: 'clear',
+    value: 'both',
+    source: decl.source
+  });
 
   // If the original rule only had clear:fix in it, remove the whole rule
   if (decl.prev() === undefined && decl.next() === undefined) {
@@ -64,17 +76,27 @@ function clearFixLegacy(decl) {
     selector: afterRuleSelectors
   }).removeAll();
 
-  bothRule.append('content: \' \'; display: table;');
+  bothRule.append({
+    prop: 'content',
+    value: '\' \'',
+    source: decl.source
+  }, {
+    prop: 'display',
+    value: 'table',
+    source: decl.source
+  })
 
   // Longhand syntax operates a little quicker, only single decls here so use it.
   afterRule.append({
     prop: 'clear',
-    value: 'both'
+    value: 'both',
+    source: decl.source
   });
 
   origRule.append({
     prop: 'zoom',
-    value: '1'
+    value: '1',
+    source: decl.source
   });
 
   decl.remove();
