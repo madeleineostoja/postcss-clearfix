@@ -1,5 +1,5 @@
 .foo:after {
     content: '';
     display: block;
-    clear: both
+    clear: both;
 }
