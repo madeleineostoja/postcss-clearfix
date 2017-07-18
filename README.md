@@ -1,41 +1,25 @@
 # PostCSS Clearfix
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-[PostCSS][PostCSS] plugin that adds `fix` and `fix-legacy` attributes to the `clear` property, for self-clearing of children.
+[PostCSS][PostCSS] plugin that adds a `fix` attribute to the `clear` property, for self-clearing of children. The outputted clearfix works in IE8+.
 
 Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack).
 
+_Input_
 ```css
-.foo {
-  clear: fix; /* IE8+ */
-}
-
-.bar {
-  clear: fix-legacy; /* IE6+ */
+.cleared {
+  clear: fix;
 }
 ```
 
+_Output_
 ```css
-.foo:after{
+.cleared:after{
   content: '';
   display: block;
   clear: both;
 }
-
-.bar:before,
-.bar:after {
-  content: '';
-  display: table;
-}
-.bar:after {
-  clear: both;
-}
-.bar {
-  zoom: 1;
-}
 ```
-
---
 
 ### Usage
 
@@ -43,21 +27,15 @@ Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack).
 postcss([ require('postcss-clearfix') ])
 ```
 
-#### Options
-
-##### display
-
-Type: `string`
-Default: `block`
-
-Allows to customise `fix` with `block` or `table` display property.
-Use `table` to prevent margin collapsing in the end of fixed element.
-
 See [PostCSS][PostCSS] docs for examples for your environment.
 
---
+### Options
 
-### License
+Property  | Type   | Default   | Description                                                                                                                    
+--------- | ------ | --------- | ------------                                                                                                                     
+`display` | String | `'block'` | Set the display property outputted in the `::after` clearfix (eg: use `'table'` to prevent collapsed margins on cleared items) 
+
+***
 
 MIT © [Sean King](https://twitter.com/seaneking)
 
