@@ -1,7 +1,9 @@
 'use strict';
 
 var postcss = require('postcss'),
-    displays = ['block', 'table'];
+    DEFAULT_OPTIONS = {
+      display: 'block'
+    };
 
 /**
  * Clear: fix; rule handler
@@ -46,88 +48,14 @@ function clearFix(decl, opts) {
 
 }
 
-/**
- * Clear: fix-legacy; rule handler
- * @param  {string} decl  current decleration
- */
-function clearFixLegacy(decl) {
-
-  var origRule = decl.parent,
-    ruleSelectors = origRule.selectors,
-    bothRuleSelectors,
-    afterRuleSelectors,
-    bothRule,
-    afterRule;
-
-    bothRuleSelectors = ruleSelectors.map(function(ruleSelector){
-        return ruleSelector + ':before,\n' + ruleSelector + ':after';
-    }).join(',\n');
-
-    afterRuleSelectors = ruleSelectors.map(function(ruleSelector){
-          return ruleSelector + ':after';
-    }).join(',\n');
-
-  // Insert new rules before the original rule
-  bothRule = origRule.cloneBefore({
-    selector: bothRuleSelectors
-  }).removeAll();
-
-  afterRule = origRule.cloneBefore({
-    selector: afterRuleSelectors
-  }).removeAll();
-
-  bothRule.append({
-    prop: 'content',
-    value: '\' \'',
-    source: decl.source
-  }, {
-    prop: 'display',
-    value: 'table',
-    source: decl.source
-  })
-
-  // Longhand syntax operates a little quicker, only single decls here so use it.
-  afterRule.append({
-    prop: 'clear',
-    value: 'both',
-    source: decl.source
-  });
-
-  origRule.append({
-    prop: 'zoom',
-    value: '1',
-    source: decl.source
-  });
-
-  decl.remove();
-}
-
 module.exports = postcss.plugin('postcss-clearfix', function(opts) {
   opts = opts || {};
-
-  if (displays.indexOf(opts.display) === -1) {
-    opts.display = displays[0];
-  }
+  Object.assign(DEFAULT_OPTIONS, opts);
 
   return function(css) {
 
-    // Run handlers through all relevant CSS decls
     css.walkDecls('clear', function(decl) {
-
-      switch (decl.value) {
-
-        // Pass all clear: fix; properties to clearFix()
-        case 'fix':
-          clearFix(decl, opts);
-          break;
-
-        // Pass all clear: fix-legacy properties to clearFixLegacy()
-        case 'fix-legacy':
-          clearFixLegacy(decl, opts);
-          break;
-
-      }
-
+      clearFix(decl, opts);
     });
 
   };

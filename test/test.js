@@ -47,14 +47,10 @@ describe('postcss-clearfix', function () {
     return test('fix', {});
   });
 
-  it('sets clear:fix with table correctly', function() {
-    return test('fix-table', {
+  it('sets clear:fix with custom display correctly', function() {
+    return test('fix-display', {
       display: 'table'
     });
-  });
-
-  it('sets clear:fix-legacy correctly', function() {
-    return test('fix-legacy', {});
   });
 
   it('handles multiple selectors and declerations', function() {

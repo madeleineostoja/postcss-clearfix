@@ -3,9 +3,3 @@
   clear: fix;
   color: #fff;
 }
-
-.baz,
-.fab {
-  clear: fix-legacy;
-  color: #000;
-}
