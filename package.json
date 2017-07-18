@@ -1,6 +1,6 @@
 {
   "name": "postcss-clearfix",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "PostCSS plugin that adds `fix` and `fix-legacy` attributes to the `clear` property, for self-clearing of children.",
   "keywords": [
     "postcss",
