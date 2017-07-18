@@ -30,15 +30,15 @@
   },
   "homepage": "https://github.com/seaneking/postcss-clearfix",
   "dependencies": {
-    "postcss": "^5.0"
+    "postcss": "^6.0.6"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^2.1.0",
-    "mocha": "^2.4.5"
+    "chai": "^4.0.2",
+    "eslint": "^4.1.1",
+    "mocha": "^3.4.2"
   },
   "scripts": {
-    "test": "mocha test --reporter nyan",
+    "test": "mocha test",
     "posttest": "eslint ."
   }
 }
