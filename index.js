@@ -50,7 +50,7 @@ function clearFix(decl, opts) {
 
 module.exports = postcss.plugin('postcss-clearfix', function(opts) {
   opts = opts || {};
-  Object.assign(DEFAULT_OPTIONS, opts);
+  opts = Object.assign({}, DEFAULT_OPTIONS, opts);
 
   return function(css) {
 
