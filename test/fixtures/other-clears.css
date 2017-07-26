@@ -1,0 +1,8 @@
+.foo {
+  clear: both;
+}
+
+.bar {
+  clear: fix;
+  clear: both;
+}

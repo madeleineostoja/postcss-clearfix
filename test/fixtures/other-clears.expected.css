@@ -1,7 +1,11 @@
-.foo,
+.foo {
+  clear: both;
+}
+
 .bar {
-  color: #fff;
-}.foo:after,
+  clear: both;
+}
+
 .bar:after {
   content: '';
   display: block;

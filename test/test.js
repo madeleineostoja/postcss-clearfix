@@ -57,4 +57,8 @@ describe('postcss-clearfix', function () {
     return test('multiple', {});
   });
 
+  it('leaves other clear properties alone', function() {
+    return test('other-clears', {});
+  });
+
 });

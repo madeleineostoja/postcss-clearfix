@@ -15,12 +15,16 @@ function clearFix(decl, opts) {
       ruleSelectors = origRule.selectors,
       newRule;
 
+  if (decl.value !== 'fix') {
+    return;
+  }
+
   ruleSelectors = ruleSelectors.map(function(ruleSelector){
       return ruleSelector + ':after';
     }).join(',\n');
 
   // Insert the :after rule before the original rule
-  newRule = origRule.cloneBefore({
+  newRule = origRule.cloneAfter({
     selector: ruleSelectors
   }).removeAll();
 
