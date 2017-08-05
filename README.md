@@ -1,18 +1,20 @@
 # PostCSS Clearfix
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+[![NPM version][npm-badge]][npm-url] [![Downloads][downloads-badge]][npm-url] [![Build Status][travis-image]][travis-url]
 
-[PostCSS][PostCSS] plugin that adds a `fix` attribute to the `clear` property, for self-clearing of children. The outputted clearfix works in IE8+.
+[PostCSS][PostCSS] plugin that adds a native `fix` value to the CSS `clear` property, for self-clearing children. The output clearfix works in IE8+.
 
-Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack).
+_Part of [Rucksack - CSS Superpowers](http://simplaio.github.io/rucksack)_
 
-_Input_
+**Input**
+
 ```css
 .cleared {
   clear: fix;
 }
 ```
 
-_Output_
+**Output**
+
 ```css
 .cleared:after{
   content: '';
@@ -39,10 +41,8 @@ Property  | Type   | Default   | Description
 
 MIT © [Sean King](https://twitter.com/seaneking)
 
-[npm-image]: https://badge.fury.io/js/postcss-clearfix.svg
+[npm-badge]: https://badge.fury.io/js/postcss-clearfix.svg
 [npm-url]: https://npmjs.org/package/postcss-clearfix
+[downloads-badge]: https://img.shields.io/npm/dm/postcss-clearfix.svg
 [travis-image]: https://travis-ci.org/seaneking/postcss-clearfix.svg?branch=master
 [travis-url]: https://travis-ci.org/seaneking/postcss-clearfix
-[daviddm-image]: https://david-dm.org/seaneking/postcss-clearfix.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/seaneking/postcss-clearfix
-[PostCSS]: https://github.com/postcss/postcss
