@@ -46,3 +46,4 @@ MIT © [Sean King](https://twitter.com/seaneking)
 [downloads-badge]: https://img.shields.io/npm/dm/postcss-clearfix.svg
 [travis-image]: https://travis-ci.org/seaneking/postcss-clearfix.svg?branch=master
 [travis-url]: https://travis-ci.org/seaneking/postcss-clearfix
+[PostCSS]: https://github.com/postcss/postcss
