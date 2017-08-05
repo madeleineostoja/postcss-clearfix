@@ -1,10 +1,10 @@
 'use strict';
 
-var postcss = require('postcss'),
-    expect = require('chai').expect,
-    fs = require('fs'),
-    path = require('path'),
-    plugin = require('../');
+const postcss = require('postcss');
+const expect = require('chai').expect;
+const fs = require('fs');
+const path = require('path');
+const plugin = require('../');
 
 process.chdir('test');
 
@@ -16,7 +16,7 @@ function readFixture(file) {
 }
 
 function test(fixture, opts) {
-  var input = readFixture(fixture + '.css'),
+  let input = readFixture(fixture + '.css'),
       expected = readFixture(fixture + '.expected.css');
 
   return postcss([ plugin(opts) ])
@@ -27,38 +27,20 @@ function test(fixture, opts) {
         annotation: false
       }
     })
-    .then(function (result) {
-      var map = result.map.toJSON(),
+    .then(result => {
+      let map = result.map.toJSON(),
           warnings = result.warnings();
       expect(map.sourcesContent.length).to.equal(1);
       expect(map.sourcesContent[0]).to.match(/clear: fix/);
       expect(result.css).to.eql(expected);
-      if (warnings.length) {
-        console.log(warnings);
-      }
       expect(warnings).to.be.empty;
-  });
-
-};
-
-describe('postcss-clearfix', function () {
-
-  it('sets clear:fix correctly', function() {
-    return test('fix', {});
-  });
-
-  it('sets clear:fix with custom display correctly', function() {
-    return test('fix-display', {
-      display: 'table'
     });
-  });
 
-  it('handles multiple selectors and declerations', function() {
-    return test('multiple', {});
-  });
+}
 
-  it('leaves other clear properties alone', function() {
-    return test('other-clears', {});
-  });
-
+describe('postcss-clearfix', () => {
+  it('sets clear:fix correctly', () => test('fix', {}));
+  it('sets clear:fix with custom display correctly', () => test('fix-display', { display: 'table' }));
+  it('handles multiple selectors and declerations', () => test('multiple', {}));
+  it('leaves other clear properties alone', () => test('other-clears', {}));
 });

@@ -1,9 +1,10 @@
 'use strict';
 
-var postcss = require('postcss'),
-    DEFAULT_OPTIONS = {
-      display: 'block'
-    };
+const postcss = require('postcss');
+
+const DEFAULT_OPTIONS = {
+  display: 'block'
+};
 
 /**
  * Clear: fix; rule handler
@@ -11,7 +12,7 @@ var postcss = require('postcss'),
  */
 function clearFix(decl, opts) {
 
-  var origRule = decl.parent,
+  let origRule = decl.parent,
       ruleSelectors = origRule.selectors,
       newRule;
 
@@ -19,9 +20,8 @@ function clearFix(decl, opts) {
     return;
   }
 
-  ruleSelectors = ruleSelectors.map(function(ruleSelector){
-      return ruleSelector + ':after';
-    }).join(',\n');
+  ruleSelectors = ruleSelectors
+    .map(ruleSelector => ruleSelector + ':after').join(',\n');
 
   // Insert the :after rule before the original rule
   newRule = origRule.cloneAfter({
