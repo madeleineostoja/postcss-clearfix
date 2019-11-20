@@ -8,7 +8,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * Clear: fix; rule handler
- * @param  {string} decl  current decleration
+ * @param  {string} decl  current declaration
  */
 function clearFix(decl, opts) {
 
@@ -21,12 +21,14 @@ function clearFix(decl, opts) {
   }
 
   ruleSelectors = ruleSelectors
-    .map(ruleSelector => ruleSelector + ':after').join(',\n');
+    .map(ruleSelector => ruleSelector + '::after').join(',\n');
 
   // Insert the :after rule before the original rule
   newRule = origRule.cloneAfter({
     selector: ruleSelectors
   }).removeAll();
+
+
 
   newRule.append({
     prop: 'content',
@@ -46,7 +48,7 @@ function clearFix(decl, opts) {
   if (decl.prev() === undefined && decl.next() === undefined) {
     origRule.remove();
   } else {
-    // Otherwise just remove the delcl
+    // Otherwise just remove the decl
     decl.remove();
   }
 
